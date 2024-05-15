@@ -20,7 +20,11 @@
         </div>
         <div>
             <label for="status">Status:</label>
-            <input type="text" name="status" id="status" value="{{ old('status', $pet['status']) }}">
+            <select name="status" id="status">
+                @foreach ($statuses as $status)
+                    <option value="{{ $status }}" {{ $status == $pet['status'] ? 'selected' : '' }}>{{ ucfirst($status) }}</option>
+                @endforeach
+            </select>
         </div>
         <button type="submit">Update Pet</button>
     </form>

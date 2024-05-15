@@ -20,9 +20,9 @@
         <div>
             <label for="status">Status:</label>
             <select name="status" id="status">
-                <option value="available" {{ old('status') === 'available' ? 'selected' : '' }}>Available</option>
-                <option value="pending" {{ old('status') === 'pending' ? 'selected' : '' }}>Pending</option>
-                <option value="sold" {{ old('status') === 'sold' ? 'selected' : '' }}>Sold</option>
+                @foreach ($statuses as $status)
+                    <option value="{{ $status }}">{{ ucfirst($status) }}</option>
+                @endforeach
             </select>
         </div>
         <button type="submit">Add Pet</button>
