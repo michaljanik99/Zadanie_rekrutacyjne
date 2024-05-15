@@ -35,7 +35,8 @@ class PetController extends Controller
     {
         try {
             $this->petRepository->add($request->all());
-            return redirect()->route('pets.index');
+            $status = $request->input('status', 'available');
+            return redirect()->route('pets.index', ['status' => $status]);
         } catch (RequestException $e) {
             \Log::error('Error adding pet: ', ['message' => $e->getMessage()]);
             return back()->withErrors(['msg' => 'Error adding pet']);
@@ -56,7 +57,8 @@ class PetController extends Controller
     {
         try {
             $this->petRepository->update($id, $request->all());
-            return redirect()->route('pets.index');
+            $status = $request->input('status', 'available');
+            return redirect()->route('pets.index', ['status' => $status]);
         } catch (RequestException $e) {
             \Log::error('Error updating pet: ', ['message' => $e->getMessage()]);
             return back()->withErrors(['msg' => 'Error updating pet']);
@@ -67,7 +69,7 @@ class PetController extends Controller
     {
         try {
             $this->petRepository->delete($id);
-            return redirect()->route('pets.index');
+            return back();
         } catch (RequestException $e) {
             return back()->withErrors(['msg' => 'Error deleting pet']);
         }
