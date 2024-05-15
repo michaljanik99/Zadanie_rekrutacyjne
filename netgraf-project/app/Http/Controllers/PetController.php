@@ -15,10 +15,11 @@ class PetController extends Controller
         $this->petRepository = $petRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $pets = $this->petRepository->findByStatus('available');
+            $status = $request->query('status', 'available');
+            $pets = $this->petRepository->findByStatus($status);
             return view('pets.index', compact('pets'));
         } catch (RequestException $e) {
             return back()->withErrors(['msg' => 'Error fetching pets']);

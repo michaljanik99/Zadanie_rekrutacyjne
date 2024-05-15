@@ -19,7 +19,11 @@
         </div>
         <div>
             <label for="status">Status:</label>
-            <input type="text" name="status" id="status" value="{{ old('status') }}">
+            <select name="status" id="status">
+                <option value="available" {{ old('status') === 'available' ? 'selected' : '' }}>Available</option>
+                <option value="pending" {{ old('status') === 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="sold" {{ old('status') === 'sold' ? 'selected' : '' }}>Sold</option>
+            </select>
         </div>
         <button type="submit">Add Pet</button>
     </form>
